@@ -1,8 +1,10 @@
-export const formatTime = (time) => {
-  const getSeconds = "Your code here";
-  const minutes = "Your code here";
-  const getMinutes = "Your code here";
-  const getHours = "Your code here";
+export const formatTime = (timeInSeconds) => {
+  const hours = Math.floor(timeInSeconds / 3600);
+  const minutes = Math.floor(timeInSeconds / 60) - hours * 60;
+  const seconds = Math.floor(timeInSeconds - hours * 3600 - minutes * 60);
+  const displayTimer = (time) => (time < 10 ? `0${time}` : time);
 
-  return `${getHours} : ${getMinutes} : ${getSeconds}`;
+  return `${displayTimer(hours)}:${displayTimer(minutes)}:${displayTimer(
+    seconds
+  )}`;
 };
