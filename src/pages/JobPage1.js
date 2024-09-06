@@ -4,18 +4,20 @@ import JobCart from "../components/JobCart";
 import { JobList } from "../data/JobList";
 import Stack from "@mui/material/Stack";
 import Pagination from "@mui/material/Pagination";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const PAGE_SIZE = 5;
 export function JobPage1() {
-  const location = useLocation();
-
-  const [page, setPage] = React.useState(1);
-  const [pageData, setPageData] = React.useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
+  const [pageData, setPageData] = useState([]);
   const handleChange = (event, value) => {
-    // const params = new URLSearchParams({ page: value });
     setPage(value);
+    setSearchParams((params) => {
+      params.set("page", value);
+      return params;
+    });
   };
   const getPageData = (pageNumber) => {
     const data = JobList.slice(
@@ -27,16 +29,6 @@ export function JobPage1() {
   useEffect(() => {
     getPageData(page);
   }, [page]);
-
-  // useEffect(() => {
-  //   const productId = new URLSearchParams(myParam).get("page");
-  //   console.log("productId", productId);
-  //   if (!productId) {
-  //     setPage(1);
-  //   } else {
-  //     setPage(productId);
-  //   }
-  // });
 
   return (
     <div>
@@ -53,6 +45,7 @@ export function JobPage1() {
             page={page}
             onChange={handleChange}
             count={3}
+
             // renderItem={(item) => (
             //   <PaginationItem
             //     component={Link}
