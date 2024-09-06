@@ -10,8 +10,9 @@ import { useSearchParams } from "react-router-dom";
 const PAGE_SIZE = 5;
 export function JobPage1() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
+  const [page, setPage] = useState(1);
   const [pageData, setPageData] = useState([]);
+
   const handleChange = (event, value) => {
     setPage(value);
     setSearchParams((params) => {
@@ -19,6 +20,7 @@ export function JobPage1() {
       return params;
     });
   };
+
   const getPageData = (pageNumber) => {
     const data = JobList.slice(
       (pageNumber - 1) * PAGE_SIZE,
@@ -26,10 +28,17 @@ export function JobPage1() {
     );
     setPageData(data);
   };
+
   useEffect(() => {
     getPageData(page);
   }, [page]);
 
+  useEffect(() => {
+    const pageParam = new URLSearchParams(searchParams).get("page");
+    if (pageParam) {
+      setPage(pageParam);
+    }
+  });
   return (
     <div>
       <Stack marginTop={2}>

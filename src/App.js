@@ -23,7 +23,6 @@ function App() {
             </>
           }
         />
-
         <Route path="/signin" element={<NotificationsSignInPageError />} />
       </Routes>
     </div>
