@@ -3,20 +3,20 @@ import Grid from "@mui/material/Grid";
 import JobCart from "../components/JobCart";
 import { JobList } from "../data/JobList";
 import Stack from "@mui/material/Stack";
-import PaginationControlled from "../components/PaginationControlled";
 import Pagination from "@mui/material/Pagination";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const PAGE_SIZE = 5;
 export function JobPage1() {
+  const location = useLocation();
+
   const [page, setPage] = React.useState(1);
   const [pageData, setPageData] = React.useState([]);
   const handleChange = (event, value) => {
-    // window.location.href = `?page=${value}`;
+    // const params = new URLSearchParams({ page: value });
     setPage(value);
   };
-  const myParam = useLocation().search;
   const getPageData = (pageNumber) => {
     const data = JobList.slice(
       (pageNumber - 1) * PAGE_SIZE,
