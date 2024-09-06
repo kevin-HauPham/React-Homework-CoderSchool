@@ -3,6 +3,7 @@ import Grid from "@mui/material/Grid";
 import JobCart from "../components/JobCart";
 import { JobList } from "../data/JobList";
 import Stack from "@mui/material/Stack";
+import PaginationControlled from "../components/PaginationControlled";
 
 export function JobPage3() {
   console.log(JobList);
@@ -16,6 +17,9 @@ export function JobPage3() {
             </Grid>
           ))}
         </Grid>
+        <Stack alignItems="center">
+          <PaginationControlled />
+        </Stack>
       </Stack>
     </div>
   );

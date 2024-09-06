@@ -1,31 +1,31 @@
 import SearchAppBar from "./components/SearchAppBar";
-import JobCart from "./components/JobCart";
 import React from "react";
-import { JobList } from "./data/JobList";
-import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
-import PaginationControlled from "./components/Pagination";
+import PaginationControlled from "./components/PaginationControlled";
 import Stack from "@mui/material/Stack";
 import { Routes, Route } from "react-router-dom";
 import { JobPage1 } from "./pages/JobPage1";
 import { JobPage2 } from "./pages/JobPage2";
 import { JobPage3 } from "./pages/JobPage3";
+import NotificationsSignInPageError from "./components/NotificationsSignInPageError";
 
 function App() {
   return (
     <div>
       <SearchAppBar />
       <Divider />
-
       <Routes>
-        <Route path="/page1" element={<JobPage1 />} />
-        <Route path="/page2" element={<JobPage2 />} />
-        <Route path="/page3" element={<JobPage3 />} />
-      </Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <JobPage1 />
+            </>
+          }
+        />
 
-      <Stack alignItems="center">
-        <PaginationControlled />
-      </Stack>
+        <Route path="/signin" element={<NotificationsSignInPageError />} />
+      </Routes>
     </div>
   );
 }
