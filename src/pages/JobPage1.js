@@ -26,6 +26,7 @@ export function JobPage1() {
       (pageNumber - 1) * PAGE_SIZE,
       pageNumber * PAGE_SIZE
     );
+    console.log(data);
     setPageData(data);
   };
 
