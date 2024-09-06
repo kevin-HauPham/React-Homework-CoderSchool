@@ -3,7 +3,7 @@ import React from "react";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { Routes, Route } from "react-router-dom";
-import { JobPage1 } from "./pages/JobPage1";
+import { JobPage} from "./pages/JobPage";
 import NotificationsSignInPageError from "./components/NotificationsSignInPageError";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
           path="/"
           element={
             <>
-              <JobPage1 />
+              <JobPage />
             </>
           }
         />

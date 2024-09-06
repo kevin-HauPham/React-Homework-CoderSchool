@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const PAGE_SIZE = 5;
-export function JobPage1() {
+export function JobPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState(1);
   const [pageData, setPageData] = useState([]);
