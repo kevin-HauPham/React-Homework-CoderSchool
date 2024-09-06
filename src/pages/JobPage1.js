@@ -13,11 +13,10 @@ export function JobPage1() {
   const [page, setPage] = React.useState(1);
   const [pageData, setPageData] = React.useState([]);
   const handleChange = (event, value) => {
-    window.location.href = `?page=${value}`;
+    // window.location.href = `?page=${value}`;
+    setPage(value);
   };
   const myParam = useLocation().search;
-  console.log("myparam", myParam);
-
   const getPageData = (pageNumber) => {
     const data = JobList.slice(
       (pageNumber - 1) * PAGE_SIZE,
@@ -29,10 +28,15 @@ export function JobPage1() {
     getPageData(page);
   }, [page]);
 
-  useEffect(() => {
-    const productId = new URLSearchParams(myParam).get("page");
-    setPage(productId);
-  });
+  // useEffect(() => {
+  //   const productId = new URLSearchParams(myParam).get("page");
+  //   console.log("productId", productId);
+  //   if (!productId) {
+  //     setPage(1);
+  //   } else {
+  //     setPage(productId);
+  //   }
+  // });
 
   return (
     <div>
