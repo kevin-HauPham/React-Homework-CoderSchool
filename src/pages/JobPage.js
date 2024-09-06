@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import Pagination from "@mui/material/Pagination";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 
 const PAGE_SIZE = 5;
 export function JobPage() {
@@ -14,11 +15,11 @@ export function JobPage() {
   const [pageData, setPageData] = useState([]);
 
   const handleChange = (event, value) => {
-    setPage(value);
     setSearchParams((params) => {
       params.set("page", value);
       return params;
     });
+    setPage(value);
   };
 
   const getPageData = (pageNumber) => {
@@ -26,7 +27,6 @@ export function JobPage() {
       (pageNumber - 1) * PAGE_SIZE,
       pageNumber * PAGE_SIZE
     );
-    console.log(data);
     setPageData(data);
   };
 
@@ -37,9 +37,9 @@ export function JobPage() {
   useEffect(() => {
     const pageParam = new URLSearchParams(searchParams).get("page");
     if (pageParam) {
-      setPage(pageParam);
+      setPage(Number(pageParam));
     }
-  });
+  }, [searchParams]);
   return (
     <div>
       <Stack marginTop={2}>
@@ -50,20 +50,8 @@ export function JobPage() {
             </Grid>
           ))}
         </Grid>
-        <Stack spacing={2}>
-          <Pagination
-            page={page}
-            onChange={handleChange}
-            count={3}
-
-            // renderItem={(item) => (
-            //   <PaginationItem
-            //     component={Link}
-            //     to={item.page === 1 ? "/" : `page${item.page}`}
-            //     {...item}
-            //   />
-            // )}
-          />
+        <Stack spacing={2} alignItems="center">
+          <Pagination count={3} page={page} onChange={handleChange} />
         </Stack>
       </Stack>
     </div>

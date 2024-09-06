@@ -7,12 +7,10 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import Stack from "@mui/material/Stack";
 import { Link } from "react-router-dom";
-
 import { useState } from "react";
 
 const Search = styled("div")(({ theme }) => ({
@@ -58,8 +56,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
-  const [signInShow, setSignInShow] = useState(false);
-  console.log(signInShow);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -82,15 +78,12 @@ export default function SearchAppBar() {
             >
               Job List
             </Typography>
-
             <Stack direction="row" spacing={2}>
               <Button
                 variant="contained"
                 endIcon={<SendIcon />}
                 component={Link}
                 to={"/signin"}
-                onClick={() => setSignInShow(!signInShow)}
-                value={signInShow}
               >
                 Sign In
               </Button>
