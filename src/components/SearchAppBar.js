@@ -5,16 +5,14 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-
 import SendIcon from "@mui/icons-material/Send";
 import Stack from "@mui/material/Stack";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import Login from "./Login";
-import { useContext, useEffect } from "react";
+import { useContext,  } from "react";
 import { InputContext } from "../context/InputPrivider";
 import { Modal, Button } from "@mui/material";
-import { light } from "@mui/material/styles/createPalette";
+
 
 export default function SearchAppBar() {
   const [login, setLogIn] = useContext(InputContext);
