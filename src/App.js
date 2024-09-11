@@ -1,15 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter } from "react-router-dom";
-
-import MainHeader from "./components/Header/MainHeader";
+import Router from "./routes/Router";
+import ThemeProvider from "./contexts/ThemeProvider";
+import { AuthProvider } from "./contexts/AuthContext";
+import "./GlobalCss.css";
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <MainHeader />
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <ThemeProvider>
+        <AuthProvider>
+          <Router />
+        </AuthProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
