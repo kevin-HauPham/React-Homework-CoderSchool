@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import apiService from "../api/apiService";
-import { API_KEY } from "../api/config";
+import { getDiscoverMovies } from "../api/apiService";
+
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import MCard from "../components/MCard";
@@ -15,16 +15,13 @@ function DiscoveryPage() {
   const [loading, setLoading] = useState();
   const [movieList, setMovieList] = useState([]);
   const { pageId } = useParams();
- 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await apiService.get(
-          `discover/movie?api_key=${API_KEY}&page=${pageId}&language=en-US`
-        );
-        setMovieList(res.data.results);
+        const discoverMoviesList = await getDiscoverMovies(pageId);
+        setMovieList(discoverMoviesList);
         setLoading(false);
       } catch (e) {
         console.log(e.message);

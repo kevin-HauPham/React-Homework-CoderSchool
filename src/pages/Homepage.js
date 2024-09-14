@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
-import apiService from "../api/apiService";
-import { API_KEY } from "../api/config";
+import { useForm } from "react-hook-form";
 import Grid from "@mui/material/Grid";
 import TrendingCardGroup from "../components/TrendingCardGroup";
 import Category from "../components/Category";
+import { getTrendingMovies } from "../api/apiService";
 
 function HomePage() {
   const [loadingTrending, setLoadingTrending] = useState();
   const [trendingList, setTrendingList] = useState([]);
   const [cutInitial, setcutInitial] = useState();
+  // const trendingMovieList = getTrendingMovies();
+  // console.log("sssssss", trendingMovieList);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoadingTrending(true);
-        const res = await apiService.get(
-          `/trending/all/week?api_key=${API_KEY}`
-        );
-        const trendingMovieList = res.data.results;
+        const trendingMovieList = await getTrendingMovies();
         setTrendingList(trendingMovieList);
         setcutInitial([...trendingMovieList].splice(16, 4));
         setLoadingTrending(false);
@@ -24,6 +24,7 @@ function HomePage() {
         console.log(e.message);
       }
     };
+
     fetchData();
   }, []);
 

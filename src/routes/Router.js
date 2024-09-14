@@ -11,12 +11,9 @@ import { useAuth } from "../contexts/AuthContext";
 
 function Router() {
   let location = useLocation();
-  console.log("location", location);
   let state = location.state;
-  console.log("state:", state);
   function RequireAuth({ children }) {
     let auth = useAuth();
-    console.log("user status:", auth.user);
     if (!auth.user) {
       // Redirect them to the /login page, but save the current location they were
       // trying to go to when they were redirected. This allows us to send them

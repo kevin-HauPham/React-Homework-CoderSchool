@@ -30,7 +30,11 @@ export default function Form() {
     password: "123456",
     remember: true,
   };
+
+  console.log("useForm", useForm);
+
   const methods = useForm({ defaultValues });
+  console.log("methods", methods);
   const {
     handleSubmit,
     // setError,
@@ -50,6 +54,13 @@ export default function Form() {
       navigate(from, { replace: true });
     });
   };
+
+  const reg = methods.register("showAge");
+  console.log("reg", reg);
+
+  const [password, setPassword] = useState("");
+  console.log("pass", password);
+
   return (
     <Modal
       open={true}
@@ -90,6 +101,7 @@ export default function Form() {
                   name="password"
                   label="Password"
                   type={showPassword ? "text" : "password"}
+                  reg
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">

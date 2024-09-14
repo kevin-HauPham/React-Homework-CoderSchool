@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import apiService from "../api/apiService";
+import { apiService } from "../api/apiService";
 import { API_KEY } from "../api/config";
 import Grid from "@mui/material/Grid";
 import MCard from "./MCard";
@@ -81,7 +81,7 @@ export default function Category() {
       </Typography>
 
       <Divider />
-      
+
       <Stack flexDirection="row" width="100%" justifyContent="space-between">
         <Stack minWidth="150px" width={{ xs: "10%" }}>
           {/* Genres-------- */}
@@ -213,13 +213,13 @@ export default function Category() {
         <Grid container direction="row" spacing={2} mt={2}>
           {loading
             ? placeholder.map((item) => (
-                <Grid item xs={10} sm={6} md={4} lg={3}>
+                <Grid key={item} item xs={10} sm={6} md={4} lg={3}>
                   {detailSkeleton}
                 </Grid>
               ))
             : movieList.map((item) => (
-                <Grid item xs={10} sm={6} md={4} lg={3}>
-                  <MCard key={item.id} item={item} />
+                <Grid key={item.id} item xs={10} sm={6} md={4} lg={3}>
+                  <MCard item={item} />
                 </Grid>
               ))}
         </Grid>

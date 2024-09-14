@@ -7,6 +7,7 @@ import PaginationItem from "@mui/material/PaginationItem";
 import Divider from "@mui/material/Divider";
 import Skeleton from "@mui/material/Skeleton";
 import { Box } from "@mui/material";
+import { PlaceSharp } from "@mui/icons-material";
 function TrendingCardGroup({ trendingList, cutInitial, loadingTrending }) {
   const [cutList, setCutList] = useState();
   const [copiedList, setcopiedList] = useState([]);
@@ -47,26 +48,29 @@ function TrendingCardGroup({ trendingList, cutInitial, loadingTrending }) {
       <Box sx={{ bgcolor: "" }}>
         <Grid container direction="row" spacing={5} mt={2}>
           {loadingTrending
-            ? placeholder.map((item) => (
-                <Grid key={item.id} item xs={6} sm={4} md={3}>
-                  {detailSkeleton}
-                </Grid>
-              ))
+            ? placeholder.map((item) => {
+                return (
+                  <Grid key={item} item xs={6} sm={4} md={3}>
+                    {detailSkeleton}
+                  </Grid>
+                );
+              })
             : cutList
-            ? cutList.map((item) => (
-                <Grid key={item.id} item xs={6} sm={4} md={3}>
-                  <MCard item={item} />
-                </Grid>
-              ))
-            : cutInitial?.map((item) => (
-                <Grid key={item.id} item xs={6} sm={4} md={3}>
-                  <MCard item={item} />
-                </Grid>
-              ))}
+              ? cutList.map((item) => (
+                  <Grid key={item.id} item xs={6} sm={4} md={3}>
+                    <MCard item={item} />
+                  </Grid>
+                ))
+              : cutInitial?.map((item) => (
+                  <Grid key={item.id} item xs={6} sm={4} md={3}>
+                    <MCard item={item} />
+                  </Grid>
+                ))}
         </Grid>
       </Box>
+      s
       <PaginationItem
-        onClick={() => setCutList(handleList())}
+        // onCick={() => setCutList(handleList())}
         type="next"
         size="large"
       />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import apiService from "../api/apiService";
-import { API_KEY } from "../api/config";
+import { getMovieDetails } from "../api/apiService";
+
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import MDetailCard from "../components/MDetailCard";
@@ -10,23 +10,19 @@ import { useAuth } from "../contexts/AuthContext";
 function MovieItemPage() {
   // let location = useLocation();
   let auth = useAuth();
-  console.log(auth.user);
   let { movieId } = useParams();
   const [loading, setLoading] = useState();
   const [movieDetail, setMovieDetail] = useState(null);
+  const [movieDetailsState, setMovieDetailsState] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await apiService.get(
-          `movie/${movieId}?api_key=${API_KEY}&language=en-US&append_to_response=videos`
-        );
-        console.log("sssss", res.data);
-        
-        setMovieDetail(res.data);
+        const movieDetails = await getMovieDetails(movieId);
+        setMovieDetail(movieDetails);
         setLoading(false);
       } catch (e) {
-        console.log(e.message);
+        setMovieDetailsState(false);
       }
     };
     fetchData();
@@ -34,12 +30,19 @@ function MovieItemPage() {
 
   return (
     <>
-      <Typography variant="h5" mb={2}>
-        MOVIE INFO
-      </Typography>
-      <Divider />
-
-      <MDetailCard movieDetail={movieDetail} loading={loading} />
+      {movieDetailsState ? (
+        <>
+          <Typography variant="h5" mb={2}>
+            MOVIE INFO
+          </Typography>
+          <Divider />
+          <MDetailCard movieDetail={movieDetail} loading={loading} />
+        </>
+      ) : (
+        <Typography variant="h5" mb={2} color="red">
+          MOVIE INFO IS UNDER UPDATING
+        </Typography>
+      )}
     </>
   );
 }
